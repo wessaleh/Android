@@ -66,6 +66,7 @@ public class pizzaOrderView extends AppCompatActivity {
     }
 
     public void addToOrder(View view) {
+        pizza.toppings.clear();
         checkToppings(pizza);
         checkSize(pizza);
 
