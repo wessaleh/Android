@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class currentOrderView extends AppCompatActivity implements AdapterView.OnItemClickListener{
 
-    Button remove;
+    Button remove, placeOrderButton;
     TextView phoneNumber, subtotal, salesTax, orderTotal;
     ArrayList<Pizza> pizzas;
     StoreOrders storeOrders;
@@ -42,6 +42,7 @@ public class currentOrderView extends AppCompatActivity implements AdapterView.O
         salesTax = findViewById(R.id.salesTax);
         orderTotal = findViewById(R.id.orderTotal);
         remove = findViewById(R.id.button);
+        placeOrderButton = findViewById(R.id.placeOrderButton);
 
         remove.setOnClickListener(this::remove);
 
@@ -52,6 +53,7 @@ public class currentOrderView extends AppCompatActivity implements AdapterView.O
         }
 
         listView.setOnItemClickListener(this);
+        placeOrderButton.setOnClickListener(this::placeOrder);
         adapter = new ArrayAdapter<String>
                 (this, android.R.layout.simple_list_item_1, pizzaList);
         listView.setAdapter(adapter);
@@ -71,6 +73,14 @@ public class currentOrderView extends AppCompatActivity implements AdapterView.O
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         selectedIndex = position;
+    }
+
+    public void placeOrder(View view){
+        Order order = new Order();
+        order.pizzas = new ArrayList<Pizza>(MainActivity.currentOrder.pizzas);
+        order.phoneNumber = new String(MainActivity.currentOrder.phoneNumber);
+
+        MainActivity.storeOrders.orders.add(order);
     }
 
     private double subTotalPrice(ArrayList<Pizza> pizzas){
