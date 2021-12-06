@@ -23,6 +23,9 @@ public class currentOrderView extends AppCompatActivity implements AdapterView.O
     ArrayAdapter adapter;
     int selectedIndex;
 
+    private final double TAX_RATE = 0.06625;
+    private final double TOTAL_RATE = 1 + TAX_RATE;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +37,7 @@ public class currentOrderView extends AppCompatActivity implements AdapterView.O
         storeOrders = (StoreOrders) intent.getExtras().get("store orders");
 
         listView = findViewById(R.id.cart);
-        phoneNumber = findViewById(R.id.phoneNumber);
+        phoneNumber = findViewById(R.id.customerPhoneNumber);
         subtotal = findViewById(R.id.subtotal);
         salesTax = findViewById(R.id.salesTax);
         orderTotal = findViewById(R.id.orderTotal);
@@ -53,6 +56,10 @@ public class currentOrderView extends AppCompatActivity implements AdapterView.O
                 (this, android.R.layout.simple_list_item_1, pizzaList);
         listView.setAdapter(adapter);
         // set the values of all the textviews
+        subtotal.setText("" + subTotalPrice(pizzas));
+        salesTax.setText("" + (subTotalPrice(pizzas) * TAX_RATE));
+        orderTotal.setText("" + (subTotalPrice(pizzas) * TOTAL_RATE));
+        phoneNumber.setText("Customer phone number: " + intent.getExtras().get("phone"));
 
     }
 
@@ -64,5 +71,13 @@ public class currentOrderView extends AppCompatActivity implements AdapterView.O
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         selectedIndex = position;
+    }
+
+    private double subTotalPrice(ArrayList<Pizza> pizzas){
+        double subTotal = 0.0;
+        for (int i = 0; i < pizzas.size(); i++){
+            subTotal += pizzas.get(i).price();
+        }
+        return subTotal;
     }
 }
