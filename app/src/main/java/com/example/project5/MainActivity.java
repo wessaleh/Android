@@ -18,8 +18,8 @@ public class MainActivity extends AppCompatActivity {
     TextView phoneNumber;
     ImageButton orderDeluxe, orderHawaiian, orderPepperoni, currentOrderView;
 
-    StoreOrders storeOrders = new StoreOrders();
-    Order currentOrder = new Order();
+    static protected StoreOrders storeOrders = new StoreOrders();
+    static protected Order currentOrder = new Order();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +48,12 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("current order", currentOrder);
 
         startActivity(intent);
+        System.out.println(currentOrder);
     }
 
     protected void orderHawaiian(View view){
         Intent intent = new Intent(this, pizzaOrderView.class);
         intent.putExtra("pizza type", "Hawaiian");
-        intent.putExtra("current order", currentOrder);
 
         startActivity(intent);
     }
@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
     protected void orderPepperoni(View view){
         Intent intent = new Intent(this, pizzaOrderView.class);
         intent.putExtra("pizza type", "Pepperoni");
-        intent.putExtra("current order", currentOrder);
 
         startActivity(intent);
     }
@@ -70,8 +69,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, currentOrderView.class);
         if(validate(phoneNumber.getText().toString())){
             intent.putExtra("phone", phoneNumber.getText());
-            intent.putExtra("cart", currentOrder);
-            intent.putExtra("store orders", storeOrders);
             startActivity(intent);
         }else{
             Context context = getApplicationContext();

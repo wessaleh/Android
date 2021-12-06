@@ -36,7 +36,6 @@ public class pizzaOrderView extends AppCompatActivity {
 
     final int MAX_TOPPINGS = 7;
 
-    @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,10 +68,7 @@ public class pizzaOrderView extends AppCompatActivity {
         pizza.toppings.clear();
         checkToppings(pizza);
         checkSize(pizza);
-
-        Intent intent = getIntent();
-        Order currentOrder = (Order) intent.getExtras().get("current order");
-        currentOrder.pizzas.add(pizza.copy());
+        MainActivity.currentOrder.addPizza(pizza.copy());
     }
 
     private void checkToppings(Pizza pizza){

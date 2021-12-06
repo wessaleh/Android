@@ -21,4 +21,8 @@ public class Order implements Serializable {
         this.phoneNumber = "";
         this.orderTotal = 0;
     }
+
+    public void addPizza(Pizza pizzaToAdd){
+        this.pizzas.add(pizzaToAdd);
+    }
 }
