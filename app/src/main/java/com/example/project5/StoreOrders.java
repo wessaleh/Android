@@ -3,6 +3,7 @@ package com.example.project5;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -10,7 +11,7 @@ import java.util.ArrayList;
  * @author Wesam Saleh, Najibullah Assadullah
  */
 
-public class StoreOrders {
+public class StoreOrders implements Serializable {
     protected ArrayList<Order> orders;
 
     /**

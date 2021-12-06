@@ -1,5 +1,6 @@
 package com.example.project5;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -7,7 +8,7 @@ import java.util.ArrayList;
  * @author Wesam Saleh, Najibullah Assadullah
  */
 
-public class Order {
+public class Order implements Serializable {
     protected ArrayList<Pizza> pizzas;
     String phoneNumber;
     double orderTotal;
