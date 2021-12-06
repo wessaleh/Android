@@ -13,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.net.URI;
 
@@ -32,6 +33,8 @@ public class pizzaOrderView extends AppCompatActivity {
     TextView pizzaLabel;
     ImageView pizzaImage;
     Pizza pizza;
+
+    final int MAX_TOPPINGS = 7;
 
     @SuppressLint("ResourceType")
     @Override
@@ -63,7 +66,74 @@ public class pizzaOrderView extends AppCompatActivity {
     }
 
     public void addToOrder(View view) {
+        checkToppings(pizza);
+        checkSize(pizza);
 
+        Intent intent = getIntent();
+        Order currentOrder = (Order) intent.getExtras().get("current order");
+        currentOrder.pizzas.add(pizza);
+    }
+
+    private void checkToppings(Pizza pizza){
+        Toast toast = Toast.makeText(getApplicationContext(), "Maximum number of toppings is 7", Toast.LENGTH_SHORT);
+        if (chicken.isChecked()){
+            if (pizza.toppings.size() <= MAX_TOPPINGS)
+                pizza.toppings.add(Topping.Chicken);
+            else
+                toast.show();
+        }
+        if (beef.isChecked())
+            if (pizza.toppings.size() <= MAX_TOPPINGS)
+                pizza.toppings.add(Topping.Chicken);
+            else
+                toast.show();
+        if (ham.isChecked())
+            if (pizza.toppings.size() <= MAX_TOPPINGS)
+                pizza.toppings.add(Topping.Chicken);
+            else
+                toast.show();
+        if (pineapples.isChecked())
+            if (pizza.toppings.size() <= MAX_TOPPINGS)
+                pizza.toppings.add(Topping.Chicken);
+            else
+                toast.show();
+        if (cheese.isChecked())
+            if (pizza.toppings.size() <= MAX_TOPPINGS)
+                pizza.toppings.add(Topping.Chicken);
+            else
+                toast.show();
+        if (sausage.isChecked())
+            if (pizza.toppings.size() <= MAX_TOPPINGS)
+                pizza.toppings.add(Topping.Chicken);
+            else
+                toast.show();
+        if (greenPepper.isChecked())
+            if (pizza.toppings.size() <= MAX_TOPPINGS)
+                pizza.toppings.add(Topping.Chicken);
+            else
+                toast.show();
+        if (pepperoni.isChecked())
+            if (pizza.toppings.size() <= MAX_TOPPINGS)
+                pizza.toppings.add(Topping.Chicken);
+            else
+                toast.show();
+        if (mushrooms.isChecked())
+            if (pizza.toppings.size() <= MAX_TOPPINGS)
+                pizza.toppings.add(Topping.Chicken);
+            else
+                toast.show();
+    }
+
+    private void checkSize(Pizza pizza){
+        if (pizzaSize.getSelectedItem().toString().equals("Small")){
+            pizza.size = Size.Small;
+        }
+        if (pizzaSize.getSelectedItem().toString().equals("Medium")){
+            pizza.size = Size.Medium;
+        }
+        if (pizzaSize.getSelectedItem().toString().equals("Large")){
+            pizza.size = Size.Large;
+        }
     }
 
 }
