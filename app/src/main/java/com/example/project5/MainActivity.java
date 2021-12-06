@@ -2,12 +2,14 @@ package com.example.project5;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -62,8 +64,36 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void viewCurrentOrder(View view){
+        Intent intent = new Intent(this, currentOrderView.class);
+        if(validate(phoneNumber.getText().toString())){
+            intent.putExtra("phone", phoneNumber.getText());
+            intent.putExtra("cart", currentOrder);
+            intent.putExtra("store orders", storeOrders);
+            startActivity(intent);
+        }else{
+            Context context = getApplicationContext();
+            CharSequence text = "Please enter a valid phone number";
+            int duration = Toast.LENGTH_SHORT;
 
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
     }
+
+    /**
+     * Validates a phone number making sure it is a 10-digit number
+     * @param number - the number to validate
+     * @return true if valid, false if not
+     */
+    public static boolean validate(String number){
+        try{
+            Long.parseLong(number);
+            return number.length() == 10; // phone number must be 10 digits long
+        }catch(NumberFormatException e){
+            return false; // not a valid phone number with 10 digits
+        }
+    }
+
 
     protected void viewStoreOrder(View view){
 

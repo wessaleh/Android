@@ -77,6 +77,7 @@ public class pizzaOrderView extends AppCompatActivity {
 
     private void checkToppings(Pizza pizza){
         Toast toast = Toast.makeText(getApplicationContext(), "Maximum number of toppings is 7", Toast.LENGTH_SHORT);
+
         if (chicken.isChecked()){
             if (pizza.toppings.size() <= MAX_TOPPINGS)
                 pizza.toppings.add(Topping.Chicken);
