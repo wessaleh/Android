@@ -72,11 +72,12 @@ public class pizzaOrderView extends AppCompatActivity {
 
         Intent intent = getIntent();
         Order currentOrder = (Order) intent.getExtras().get("current order");
-        currentOrder.pizzas.add(pizza);
+        currentOrder.pizzas.add(pizza.copy());
     }
 
     private void checkToppings(Pizza pizza){
-        Toast toast = Toast.makeText(getApplicationContext(), "Maximum number of toppings is 7", Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(getApplicationContext(),
+                "Maximum number of toppings is 7", Toast.LENGTH_SHORT);
 
         if (chicken.isChecked()){
             if (pizza.toppings.size() <= MAX_TOPPINGS)
@@ -86,42 +87,42 @@ public class pizzaOrderView extends AppCompatActivity {
         }
         if (beef.isChecked())
             if (pizza.toppings.size() <= MAX_TOPPINGS)
-                pizza.toppings.add(Topping.Chicken);
+                pizza.toppings.add(Topping.Beef);
             else
                 toast.show();
         if (ham.isChecked())
             if (pizza.toppings.size() <= MAX_TOPPINGS)
-                pizza.toppings.add(Topping.Chicken);
+                pizza.toppings.add(Topping.Ham);
             else
                 toast.show();
         if (pineapples.isChecked())
             if (pizza.toppings.size() <= MAX_TOPPINGS)
-                pizza.toppings.add(Topping.Chicken);
+                pizza.toppings.add(Topping.Pineapple);
             else
                 toast.show();
         if (cheese.isChecked())
             if (pizza.toppings.size() <= MAX_TOPPINGS)
-                pizza.toppings.add(Topping.Chicken);
+                pizza.toppings.add(Topping.Cheese);
             else
                 toast.show();
         if (sausage.isChecked())
             if (pizza.toppings.size() <= MAX_TOPPINGS)
-                pizza.toppings.add(Topping.Chicken);
+                pizza.toppings.add(Topping.Sausage);
             else
                 toast.show();
         if (greenPepper.isChecked())
             if (pizza.toppings.size() <= MAX_TOPPINGS)
-                pizza.toppings.add(Topping.Chicken);
+                pizza.toppings.add(Topping.GreenPepper);
             else
                 toast.show();
         if (pepperoni.isChecked())
             if (pizza.toppings.size() <= MAX_TOPPINGS)
-                pizza.toppings.add(Topping.Chicken);
+                pizza.toppings.add(Topping.Pepperoni);
             else
                 toast.show();
         if (mushrooms.isChecked())
             if (pizza.toppings.size() <= MAX_TOPPINGS)
-                pizza.toppings.add(Topping.Chicken);
+                pizza.toppings.add(Topping.Mushroom);
             else
                 toast.show();
     }

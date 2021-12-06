@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     TextView phoneNumber;
-    ImageButton orderDeluxe, orderHawaiian, orderPepperoni;
+    ImageButton orderDeluxe, orderHawaiian, orderPepperoni, currentOrderView;
 
     StoreOrders storeOrders = new StoreOrders();
     Order currentOrder = new Order();
@@ -36,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
 
         orderPepperoni = findViewById(R.id.pepperoniPicture);
         orderPepperoni.setOnClickListener(this::orderPepperoni);
+
+        currentOrderView = findViewById(R.id.currentOrderPicture);
+        currentOrderView.setOnClickListener(this::viewCurrentOrder);
     }
 
     protected void orderDeluxe(View view){
