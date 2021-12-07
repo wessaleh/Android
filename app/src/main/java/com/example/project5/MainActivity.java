@@ -5,18 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity {
 
     TextView phoneNumber;
-    ImageButton orderDeluxe, orderHawaiian, orderPepperoni, currentOrderView;
+    ImageButton orderDeluxe, orderHawaiian, orderPepperoni, currentOrderView, storeOrderView;
 
     static protected StoreOrders storeOrders = new StoreOrders();
     static protected Order currentOrder = new Order();
@@ -39,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
 
         currentOrderView = findViewById(R.id.currentOrderPicture);
         currentOrderView.setOnClickListener(this::viewCurrentOrder);
+
+        storeOrderView = findViewById(R.id.storeOrderPicture);
+        storeOrderView.setOnClickListener(this::viewStoreOrder);
     }
 
     protected void orderDeluxe(View view){
@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     protected void viewStoreOrder(View view){
-
+        Intent intent = new Intent(this, storeOrderView.class);
+        startActivity(intent);
     }
 }

@@ -52,18 +52,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/orderTotalTitle" />
 
-    <TextView
-        android:id="@+id/listOfOrders"
-        android:layout_width="244dp"
-        android:layout_height="431dp"
-        android:layout_marginStart="84dp"
-        android:layout_marginEnd="83dp"
-        android:editable="true"
-        android:inputType="none"
-        android:text="No orders available"
-        app:layout_constraintBottom_toTopOf="@+id/orderTotal2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listOfPhoneNumbers" />
+    <ListView
+        android:id="@+id/orders"
+        android:layout_width="409dp"
+        android:layout_height="505dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="86dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
