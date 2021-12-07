@@ -10,7 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class currentOrderView extends AppCompatActivity implements AdapterView.OnItemClickListener{
@@ -25,6 +27,9 @@ public class currentOrderView extends AppCompatActivity implements AdapterView.O
 
     private final double TAX_RATE = 0.06625;
     private final double TOTAL_RATE = 1 + TAX_RATE;
+    private static final int NUM_DECIMAL_PLACES = 2;
+    private static final int NUM_INT_PLACES = 1;
+    private DecimalFormat money_Format;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,16 +63,25 @@ public class currentOrderView extends AppCompatActivity implements AdapterView.O
                 (this, android.R.layout.simple_list_item_1, pizzaList);
         listView.setAdapter(adapter);
         // set the values of all the textviews
-        subtotal.setText("" + subTotalPrice(pizzas));
-        salesTax.setText("" + (subTotalPrice(pizzas) * TAX_RATE));
-        orderTotal.setText("" + (subTotalPrice(pizzas) * TOTAL_RATE));
-        phoneNumber.setText("Customer phone number: " + intent.getExtras().get("phone"));
+
+        money_Format = new DecimalFormat("###,###.00");
+        money_Format.setMinimumFractionDigits(NUM_DECIMAL_PLACES);
+        money_Format.setMinimumIntegerDigits(NUM_INT_PLACES);
+
+        subtotal.setText("" + money_Format.format(subTotalPrice(pizzas)));
+        salesTax.setText("" + money_Format.format(subTotalPrice(pizzas) * TAX_RATE));
+        orderTotal.setText("" + money_Format.format(subTotalPrice(pizzas) * TOTAL_RATE));
+        phoneNumber.setText("Customer Phone Number: " + intent.getExtras().get("phone"));
 
     }
 
     public void remove(View view){
         MainActivity.currentOrder.pizzas.remove(selectedIndex);
         adapter.remove(selectedIndex);
+
+        Toast toast = Toast.makeText(getApplicationContext(),
+                "Please exit and come back to view updated order", Toast.LENGTH_LONG);
+        toast.show();
     }
 
     @Override
