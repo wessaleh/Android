@@ -13,7 +13,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+
+/**
+ * @author Wesam Saleh, Najibullah Assadullah
+ */
 
 public class storeOrderView extends AppCompatActivity{
 
@@ -22,11 +27,18 @@ public class storeOrderView extends AppCompatActivity{
     TextView orderTotal;
     ArrayAdapter adapter;
 
+    private final double TAX_RATE = 0.06625;
+    private final double TOTAL_RATE = 1 + TAX_RATE;
+    private static final int NUM_DECIMAL_PLACES = 2;
+    private static final int NUM_INT_PLACES = 1;
+    private DecimalFormat money_Format;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_order_view);
 
+        // Initializing UI elements
         pizzas = findViewById(R.id.orders);
         phoneNumbers = findViewById(R.id.listOfPhoneNumbers);
         orderTotal = findViewById(R.id.orderTotal2);
@@ -42,6 +54,21 @@ public class storeOrderView extends AppCompatActivity{
 
         //populate listview with pizzas
 
+        //Correct formatting
+        money_Format = new DecimalFormat("###,###.00");
+        money_Format.setMinimumFractionDigits(NUM_DECIMAL_PLACES);
+        money_Format.setMinimumIntegerDigits(NUM_INT_PLACES);
+
         //Compute Order Total
+    }
+
+    // Computes total price of order
+    private double orderTotalPrice(ArrayList<Pizza> pizzas){
+        double orderTotal = 0.0;
+        for (int i = 0; i < pizzas.size(); i++){
+            orderTotal += pizzas.get(i).price();
+        }
+        orderTotal = orderTotal * TOTAL_RATE;
+        return orderTotal;
     }
 }

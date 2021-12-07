@@ -10,6 +10,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * @author Wesam Saleh, Najibullah Assadullah
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     TextView phoneNumber;
@@ -23,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Initializing UI elements
         phoneNumber = findViewById(R.id.phoneNumber);
 
         orderDeluxe = findViewById(R.id.deluxePicture);

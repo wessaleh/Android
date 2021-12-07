@@ -15,6 +15,10 @@ import android.widget.Toast;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+/**
+ * @author Wesam Saleh, Najibullah Assadullah
+ */
+
 public class currentOrderView extends AppCompatActivity implements AdapterView.OnItemClickListener{
 
     Button remove, placeOrderButton;
@@ -41,6 +45,7 @@ public class currentOrderView extends AppCompatActivity implements AdapterView.O
 
         storeOrders = (StoreOrders) intent.getExtras().get("store orders");
 
+        // Initializing UI elements
         listView = findViewById(R.id.cart);
         phoneNumber = findViewById(R.id.customerPhoneNumber);
         subtotal = findViewById(R.id.subtotal);
@@ -62,12 +67,13 @@ public class currentOrderView extends AppCompatActivity implements AdapterView.O
         adapter = new ArrayAdapter<String>
                 (this, android.R.layout.simple_list_item_1, pizzaList);
         listView.setAdapter(adapter);
-        // set the values of all the textviews
 
+        // Sets format
         money_Format = new DecimalFormat("###,###.00");
         money_Format.setMinimumFractionDigits(NUM_DECIMAL_PLACES);
         money_Format.setMinimumIntegerDigits(NUM_INT_PLACES);
 
+        // Sets the values of all the textviews
         subtotal.setText("" + money_Format.format(subTotalPrice(pizzas)));
         salesTax.setText("" + money_Format.format(subTotalPrice(pizzas) * TAX_RATE));
         orderTotal.setText("" + money_Format.format(subTotalPrice(pizzas) * TOTAL_RATE));
@@ -75,6 +81,7 @@ public class currentOrderView extends AppCompatActivity implements AdapterView.O
 
     }
 
+    // Removes pizza from order
     public void remove(View view){
         MainActivity.currentOrder.pizzas.remove(selectedIndex);
         adapter.remove(selectedIndex);
@@ -89,6 +96,7 @@ public class currentOrderView extends AppCompatActivity implements AdapterView.O
         selectedIndex = position;
     }
 
+    // Places order
     public void placeOrder(View view){
         Order order = new Order();
         order.pizzas = new ArrayList<Pizza>(MainActivity.currentOrder.pizzas);
@@ -97,6 +105,7 @@ public class currentOrderView extends AppCompatActivity implements AdapterView.O
         MainActivity.storeOrders.orders.add(order);
     }
 
+    // Computes subtotal
     private double subTotalPrice(ArrayList<Pizza> pizzas){
         double subTotal = 0.0;
         for (int i = 0; i < pizzas.size(); i++){

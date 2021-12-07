@@ -17,6 +17,10 @@ import android.widget.Toast;
 
 import java.net.URI;
 
+/**
+ * @author Wesam Saleh, Najibullah Assadullah
+ */
+
 public class pizzaOrderView extends AppCompatActivity {
 
     Button addToOrder;
@@ -41,6 +45,7 @@ public class pizzaOrderView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pizza_order_view);
 
+        // Initializing UI elements
         addToOrder = findViewById(R.id.addToOrder);
         pizzaSize = findViewById(R.id.pizzaSize);
         chicken = findViewById(R.id.chicken);
@@ -56,6 +61,7 @@ public class pizzaOrderView extends AppCompatActivity {
         pizzaLabel = findViewById(R.id.pizzaLabel);
         pizzaImage = findViewById(R.id.pizzaPicture);
 
+        // Makes pizza
         Intent intent = getIntent();
         String pizzaType = intent.getExtras().get("pizza type").toString();
         pizza = PizzaMaker.createPizza(pizzaType);
@@ -64,6 +70,7 @@ public class pizzaOrderView extends AppCompatActivity {
         addToOrder.setOnClickListener(this::addToOrder);
     }
 
+    // Adds pizza to order
     public void addToOrder(View view) {
         pizza.toppings.clear();
         checkToppings(pizza);
@@ -71,6 +78,7 @@ public class pizzaOrderView extends AppCompatActivity {
         MainActivity.currentOrder.addPizza(pizza.copy());
     }
 
+    // Checks topping checkboxes and amount of toppings
     private void checkToppings(Pizza pizza){
         Toast toast = Toast.makeText(getApplicationContext(),
                 "Maximum number of toppings is 7", Toast.LENGTH_SHORT);
@@ -123,6 +131,7 @@ public class pizzaOrderView extends AppCompatActivity {
                 toast.show();
     }
 
+    // Checks pizza size dropdown menu and applies size
     private void checkSize(Pizza pizza){
         if (pizzaSize.getSelectedItem().toString().equals("Small")){
             pizza.size = Size.Small;
