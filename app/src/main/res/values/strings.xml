@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">project5</string>
+    <string name="app_name">RU Pizzeria</string>
     <string name="remove"><![CDATA[remove <<]]></string>
 
     <string-array name="size_class">
